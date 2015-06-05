@@ -1,5 +1,22 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .row
+    .col-xs-12.posting-pane
+      form.form-horizontal(method="post" action="/message")
+        .form-group
+          label.col-sm-2.control-label(for="message") Whatcha thinkin about?
+          .col-sm-8
+            input.form-control(type="text" name="message" id="message" placeholder="Nothin...just bear stuffs.")
+          .col-sm-2
+            input.form-control.btn.btn-primary(type="submit" value="Say it!")
+  .row.messages
+    each message in messages
+      .col-xs-8
+        .row
+          .col-md-2.col-xs-12.message-user.message
+            = message.username
+          .col-md-8.col-xs-12.message-body.message
+            = message.body
+          .col-md-2.col-xs-12.message-posted.message
+            = message.formattedDate

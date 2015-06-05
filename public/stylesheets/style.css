@@ -13,6 +13,32 @@ a {
   padding-bottom: 20px;
 }
 
+.posting-pane {
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding-top: 15px;
+}
+
+.messages {
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.messages .row {
+    padding-left: 10px;
+}
+
+.message {
+    padding: 10px 20px 10px 20px;
+    margin: 10px 0 10px 0;
+    background-color: #FCCB86;
+}
+
+.message-body {
+    background-color: #F7AA3E;
+}
+
 header {
     background-color: #D8D8D8;
 }
