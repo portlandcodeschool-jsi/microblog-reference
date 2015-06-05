@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 var app = express();
 app.set('database', knex);
 
+module.exports = app;
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -25,8 +27,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*
+This is a middleware that will run before any request handlers.
+It sets some attributes on response.locals, which is passed to the jade templates when rendering.
+This way we don't have to include these values in every call to response.render().
+*/
+app.use(function(request, response, next) {
+    response.locals.title = "Torter: a microblog for the new millenium";
+    if (request.cookies.username) {
+        response.locals.username = request.cookies.username;
+    }
+    next();
+});
+
 app.use('/', routes);
-app.use('/users', users);
+app.use('/', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,6 +73,3 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-
-module.exports = app;

@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  if error
+    .alert.alert-danger= error
+  .row
+    // the col-* classes are meaningful to bootstrap; they say that this div should be half a window
+    // wide on medium screens and larger, and the full width of the window on small screens. The login-pane
+    // gets a little roundrect border from style.css.
+    .col-md-6.col-sm-12.login-pane
+      h2 Log in
+      form(action="/login" method="post")
+        // normally we'd just call the fields "username" rather than prepending "login-", but since
+        // * inputs' names must match their IDs
+        // * we have multiple forms on this page
+        // * IDs must be unique
+        // we need to differentiate both the IDs and the names.
+        label(for="login-username") Username:
+        // if we're re-rendering this page after an error, the user may have typed a username previously.
+        // using `value=loginUsername` pre-fills the field with what they tried before.
+        input.form-control(name="login-username" id="login-username" type="text" value=loginUsername)
+        label(for="login-password") Password:
+        input.form-control(name="login-password" id="login-password" type="password")
+        input.form-control.btn.btn-default(type="submit" value="Let me in!")
+    .col-md-6.col-sm-12.login-pane
+      h2 Register
+      form(action="/register" method="post")
+        label(for="register-username") Username:
+        input.form-control(name="register-username" id="register-username" type="text" value=registerUsername)
+        label(for="register-password") Password:
+        input.form-control(name="register-password" id="register-password" type="password")
+        label(for="confirm-password") Confirm Password:
+        input.form-control(name="confirm-password" id="confirm-password" type="password")
+        input.form-control.btn.btn-default(type="submit" value="Glad to be here!")

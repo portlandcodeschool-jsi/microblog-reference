@@ -5,6 +5,17 @@ html
     link(rel='stylesheet', href='/stylesheets/bootstrap-3.3.4.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    header.row
+      .col-md-8.col-sm-12
+        h1= title
+      if username
+        .col-md-4.col-sm-12
+          // I'm using = and raw strings here in order to include the trailing spaces.
+          = 'Logged in as '
+          span.username= username
+          = '. '
+          a(href='/logout') Log out
+
     block content
     script(src="/javascripts/jquery-2.1.4.min.js")
     script(src="/javascripts/bootstrap-3.3.4.min.js")
